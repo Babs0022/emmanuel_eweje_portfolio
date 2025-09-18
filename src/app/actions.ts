@@ -61,6 +61,9 @@ export async function uploadArtwork(formData: FormData) {
     });
 
     revalidatePath('/gallery');
+    revalidatePath('/admin');
+    revalidatePath('/');
+
 
     return { success: true };
   } catch (error) {
@@ -95,5 +98,33 @@ export async function uploadProfilePicture(formData: FormData) {
     } catch (error) {
         console.error("Error uploading profile picture:", error);
         return { error: (error as Error).message };
+  }
+}
+
+
+export async function deleteArtwork(artworkId: string, imageUrl: string) {
+  if (!db || !storage) {
+    return { error: 'Firebase is not initialized. Please check your server environment variables.' };
+  }
+  try {
+    // Delete from Firestore
+    await db.collection('artwork').doc(artworkId).delete();
+
+    // Delete from Storage
+    const bucket = storage.bucket();
+    // Extract the path from the URL
+    const url = new URL(imageUrl);
+    const path = url.pathname.substring(url.pathname.indexOf('/', 1) + 1); // Remove leading slash and bucket name
+    const decodedPath = decodeURIComponent(path);
+    await bucket.file(decodedPath).delete();
+    
+    revalidatePath('/gallery');
+    revalidatePath('/admin');
+    revalidatePath('/');
+
+    return { success: true };
+  } catch (error) {
+    console.error("Error deleting artwork:", error);
+    return { error: (error as Error).message };
   }
 }
