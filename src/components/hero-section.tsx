@@ -47,7 +47,7 @@ export default function HeroSection() {
           </div>
         </div>
         <div className="mt-16 md:mt-24">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-center">Artist Statement</h2>
+          <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl text-center">Artist Statement</h2>
           <div className="max-w-3xl mx-auto">
             <p className="mt-6 text-lg text-foreground/80 leading-relaxed text-justify">
               {artistStatement}
