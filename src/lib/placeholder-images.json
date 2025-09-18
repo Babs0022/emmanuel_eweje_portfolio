@@ -1,3 +1,40 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "artwork-1",
+      "title": "Convergence",
+      "imageUrl": "https://picsum.photos/seed/a1/800/1000",
+      "imageHint": "abstract painting"
+    },
+    {
+      "id": "artwork-2",
+      "title": "Urban Dreams",
+      "imageUrl": "https://picsum.photos/seed/a2/800/1000",
+      "imageHint": "cityscape oil"
+    },
+    {
+      "id": "artwork-3",
+      "title": "Serenity in Motion",
+      "imageUrl": "https://picsum.photos/seed/a3/800/1000",
+      "imageHint": "flowing colors"
+    },
+    {
+      "id": "artwork-4",
+      "title": "Fragments of Time",
+      "imageUrl": "https://picsum.photos/seed/a4/800/1000",
+      "imageHint": "textured art"
+    },
+    {
+      "id": "artwork-5",
+      "title": "The Thinker",
+      "imageUrl": "https://picsum.photos/seed/a5/800/1000",
+      "imageHint": "portrait male"
+    },
+    {
+      "id": "artwork-6",
+      "title": "Coastal Whispers",
+      "imageUrl": "https://picsum.photos/seed/a6/800/1000",
+      "imageHint": "seascape abstract"
+    }
+  ]
 }
