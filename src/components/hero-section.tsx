@@ -41,7 +41,7 @@ export default function HeroSection() {
     <section id="about" className="container mx-auto px-4 py-16 sm:py-24 lg:py-32">
       <div className="max-w-3xl mx-auto text-center">
         <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
-          Emmanuel Eweje
+          Emmanuel Eweje - A Contemporary Artist
         </h1>
         <p className="mt-6 text-lg text-foreground/80 leading-relaxed">
           {shortBio}
