@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react';
 
 export default function HeroSection() {
 
-  const [profilePicUrl, setProfilePicUrl] = useState("https://picsum.photos/seed/profile/600/600");
+  const [profilePicUrl, setProfilePicUrl] = useState("https://storage.googleapis.com/gweb-a2-9ad0c.appspot.com/config/pfp.jpg");
   
   useEffect(() => {
     const unsub = onSnapshot(doc(db, "config", "profile"), (doc) => {
