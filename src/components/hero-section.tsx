@@ -2,6 +2,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -39,21 +40,33 @@ export default function HeroSection() {
 
   return (
     <section id="about" className="container mx-auto px-4 py-16 sm:py-24 lg:py-32">
-      <div className="max-w-3xl mx-auto text-center">
-        <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
-          Emmanuel Eweje - A Contemporary Artist
-        </h1>
-        <p className="mt-6 text-lg text-foreground/80 leading-relaxed">
-          {shortBio}
-        </p>
-        <Button onClick={handleExpandBio} className="mt-8" size="lg" disabled={isLoading}>
-          {isLoading ? (
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-          ) : (
-            <Sparkles className="mr-2 h-4 w-4" />
-          )}
-          Expand Bio with AI
-        </Button>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div className="order-2 md:order-1">
+          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
+            Emmanuel Eweje - A Contemporary Artist
+          </h1>
+          <p className="mt-6 text-lg text-foreground/80 leading-relaxed">
+            {shortBio}
+          </p>
+          <Button onClick={handleExpandBio} className="mt-8" size="lg" disabled={isLoading}>
+            {isLoading ? (
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            ) : (
+              <Sparkles className="mr-2 h-4 w-4" />
+            )}
+            Expand Bio with AI
+          </Button>
+        </div>
+        <div className="order-1 md:order-2 flex justify-center">
+           <Image
+              src="https://picsum.photos/seed/profile/600/600"
+              alt="Emmanuel Eweje profile picture"
+              width={400}
+              height={400}
+              className="rounded-full aspect-square object-cover"
+              data-ai-hint="artist portrait"
+            />
+        </div>
       </div>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
