@@ -3,11 +3,12 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Menu, Paintbrush } from 'lucide-react';
+import { Menu, Paintbrush, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import { useAuth } from '@/hooks/use-auth';
 
 const navLinks = [
   { href: '/', label: 'About' },
@@ -19,6 +20,7 @@ const navLinks = [
 export default function SiteHeader() {
   const [isSheetOpen, setSheetOpen] = useState(false);
   const pathname = usePathname();
+  const { user, signOutUser } = useAuth();
 
   const handleLinkClick = () => {
     setSheetOpen(false);
@@ -51,34 +53,43 @@ export default function SiteHeader() {
           ))}
         </nav>
 
-        <div className="flex flex-1 items-center justify-end md:hidden">
-          <Sheet open={isSheetOpen} onOpenChange={setSheetOpen}>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <Menu className="h-6 w-6" />
-                <span className="sr-only">Toggle Menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right">
-              <div className="flex flex-col space-y-4 pt-8">
-                {navLinks.map(({ href, label }) => (
-                  <Link
-                    key={href}
-                    href={href}
-                    onClick={handleLinkClick}
-                    className={cn(
-                      "text-lg font-medium hover:text-foreground",
-                      pathname === href ? "text-foreground" : "text-foreground/80"
-                    )}
-                  >
-                    {label}
-                  </Link>
-                ))}
-              </div>
-            </SheetContent>
-          </Sheet>
+        <div className="flex flex-1 items-center justify-end space-x-4">
+          {user && (
+            <Button variant="ghost" size="sm" onClick={signOutUser}>
+              <LogOut className="mr-2 h-4 w-4" />
+              Sign Out
+            </Button>
+          )}
+          <div className="md:hidden">
+            <Sheet open={isSheetOpen} onOpenChange={setSheetOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Menu className="h-6 w-6" />
+                  <span className="sr-only">Toggle Menu</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right">
+                <div className="flex flex-col space-y-4 pt-8">
+                  {navLinks.map(({ href, label }) => (
+                    <Link
+                      key={href}
+                      href={href}
+                      onClick={handleLinkClick}
+                      className={cn(
+                        "text-lg font-medium hover:text-foreground",
+                        pathname === href ? "text-foreground" : "text-foreground/80"
+                      )}
+                    >
+                      {label}
+                    </Link>
+                  ))}
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
       </div>
     </header>
   );
 }
+
