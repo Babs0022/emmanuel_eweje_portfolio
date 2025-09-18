@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useActionState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useAuth } from '@/hooks/use-auth';
@@ -129,6 +129,40 @@ export default function AdminPage() {
       router.push('/login');
     }
   }, [user, loading, router]);
+  
+  const [artworkState, artworkFormAction] = useActionState(uploadArtwork, null);
+  const [profileState, profileFormAction] = useActionState(uploadProfilePicture, null);
+
+  useEffect(() => {
+    if(artworkState?.success) {
+       toast({
+          title: 'Upload Successful',
+          description: "The new artwork has been added to the gallery.",
+        });
+    } else if (artworkState?.error) {
+       toast({
+          variant: 'destructive',
+          title: 'Upload Failed',
+          description: artworkState.error,
+        });
+    }
+  }, [artworkState, toast]);
+
+  useEffect(() => {
+    if(profileState?.success) {
+       toast({
+          title: 'Update Successful',
+          description: "Your profile picture has been updated.",
+        });
+    } else if (profileState?.error) {
+       toast({
+          variant: 'destructive',
+          title: 'Update Failed',
+          description: profileState.error,
+        });
+    }
+  }, [profileState, toast]);
+
 
   if (loading || !user) {
     return (
@@ -174,28 +208,6 @@ export default function AdminPage() {
       </div>
     );
   }
-  
-  const handleClientUpload = async (action: (formData: FormData) => Promise<any>, successTitle: string, successDescription: string, failureTitle: string) => {
-    return async (formData: FormData) => {
-      try {
-        const result = await action(formData);
-        if (result?.error) {
-          throw new Error(result.error);
-        }
-        toast({
-          title: successTitle,
-          description: successDescription,
-        });
-      } catch (error) {
-        toast({
-          variant: 'destructive',
-          title: failureTitle,
-          description: (error as Error).message || 'An unknown server error occurred.',
-        });
-      }
-    };
-  };
-
 
   return (
     <div className="flex flex-col min-h-[100dvh]">
@@ -212,7 +224,7 @@ export default function AdminPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <form action={handleClientUpload(uploadArtwork, "Upload Successful", "The new artwork has been added to the gallery.", "Upload Failed")} className="space-y-6">
+                <form action={artworkFormAction} className="space-y-6">
                   <div className="space-y-2">
                     <Label htmlFor="title">Artwork Title</Label>
                     <Input id="title" name="title" placeholder="e.g., 'Sunset over Lagos'" required />
@@ -234,7 +246,7 @@ export default function AdminPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <form action={handleClientUpload(uploadProfilePicture, "Update Successful", "Your profile picture has been updated.", "Update Failed")} className="space-y-6">
+                <form action={profileFormAction} className="space-y-6">
                   <div className="space-y-2">
                     <Label htmlFor="profile-image">Profile Picture</Label>
                     <Input id="profile-image" name="profile-image" type="file" required accept="image/*" />
@@ -250,4 +262,3 @@ export default function AdminPage() {
     </div>
   );
 }
-
