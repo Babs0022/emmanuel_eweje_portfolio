@@ -174,65 +174,26 @@ export default function AdminPage() {
       </div>
     );
   }
-
-  const handleArtworkUpload = async (formData: FormData) => {
-    const title = formData.get('title') as string;
-    const image = formData.get('image') as File;
-
-    if (!title || !image || image.size === 0) {
-      toast({
-        variant: "destructive",
-        title: "Missing fields",
-        description: "Please provide a title and an image file.",
-      });
-      return;
-    }
-    
-    try {
-      const result = await uploadArtwork(formData);
-      if (result.error) {
-        throw new Error(result.error);
-      }
-      toast({
-        title: "Upload Successful",
-        description: "The new artwork has been added to the gallery.",
-      });
-    } catch (error) {
-      toast({
-        variant: "destructive",
-        title: "Upload Failed",
-        description: (error as Error).message || "An unknown error occurred.",
-      });
-    }
-  };
   
-  const handleProfilePictureUpload = async (formData: FormData) => {
-    const image = formData.get('profile-image') as File;
-    if (!image || image.size === 0) {
-        toast({
-            variant: "destructive",
-            title: "Missing file",
-            description: "Please select an image to upload.",
-        });
-        return;
-    }
-
-    try {
-        const result = await uploadProfilePicture(formData);
-        if (result.error) {
-            throw new Error(result.error);
+  const handleClientUpload = async (action: (formData: FormData) => Promise<any>, successTitle: string, successDescription: string, failureTitle: string) => {
+    return async (formData: FormData) => {
+      try {
+        const result = await action(formData);
+        if (result?.error) {
+          throw new Error(result.error);
         }
         toast({
-            title: "Update Successful",
-            description: "Your profile picture has been updated.",
+          title: successTitle,
+          description: successDescription,
         });
-    } catch (error) {
-         toast({
-            variant: "destructive",
-            title: "Update Failed",
-            description: (error as Error).message || "An unknown error occurred.",
+      } catch (error) {
+        toast({
+          variant: 'destructive',
+          title: failureTitle,
+          description: (error as Error).message || 'An unknown server error occurred.',
         });
-    }
+      }
+    };
   };
 
 
@@ -251,7 +212,7 @@ export default function AdminPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <form action={handleArtworkUpload} className="space-y-6">
+                <form action={handleClientUpload(uploadArtwork, "Upload Successful", "The new artwork has been added to the gallery.", "Upload Failed")} className="space-y-6">
                   <div className="space-y-2">
                     <Label htmlFor="title">Artwork Title</Label>
                     <Input id="title" name="title" placeholder="e.g., 'Sunset over Lagos'" required />
@@ -273,7 +234,7 @@ export default function AdminPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <form action={handleProfilePictureUpload} className="space-y-6">
+                <form action={handleClientUpload(uploadProfilePicture, "Update Successful", "Your profile picture has been updated.", "Update Failed")} className="space-y-6">
                   <div className="space-y-2">
                     <Label htmlFor="profile-image">Profile Picture</Label>
                     <Input id="profile-image" name="profile-image" type="file" required accept="image/*" />
@@ -289,3 +250,4 @@ export default function AdminPage() {
     </div>
   );
 }
+
