@@ -63,7 +63,7 @@ export default function HeroSection() {
               alt="Emmanuel Eweje profile picture"
               width={400}
               height={400}
-              className="rounded-full aspect-square object-cover"
+              className="rounded-3xl aspect-square object-cover"
               data-ai-hint="artist portrait"
             />
         </div>
