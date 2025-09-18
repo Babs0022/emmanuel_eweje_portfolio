@@ -17,6 +17,9 @@ export async function expandArtistBioAction(input: ExpandArtistBioInput) {
 }
 
 async function uploadFile(file: File, path: string): Promise<string> {
+    if (!storage) {
+        throw new Error('Firebase Storage is not initialized. Please check your server environment variables.');
+    }
     const fileBuffer = Buffer.from(await file.arrayBuffer());
     const bucket = storage.bucket();
     const fileRef = bucket.file(path);
@@ -33,6 +36,9 @@ async function uploadFile(file: File, path: string): Promise<string> {
 }
 
 export async function uploadArtwork(formData: FormData) {
+  if (!db) {
+    return { error: 'Firebase Firestore is not initialized. Please check your server environment variables.' };
+  }
   try {
     const title = formData.get('title') as string;
     const image = formData.get('image') as File;
@@ -64,6 +70,9 @@ export async function uploadArtwork(formData: FormData) {
 }
 
 export async function uploadProfilePicture(formData: FormData) {
+    if (!db) {
+      return { error: 'Firebase Firestore is not initialized. Please check your server environment variables.' };
+    }
     try {
         const image = formData.get('profile-image') as File;
 
@@ -86,5 +95,5 @@ export async function uploadProfilePicture(formData: FormData) {
     } catch (error) {
         console.error("Error uploading profile picture:", error);
         return { error: (error as Error).message };
-    }
+  }
 }
