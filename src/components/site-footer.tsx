@@ -28,7 +28,7 @@ export default function SiteFooter() {
             </Link>
           </Button>
           <Button variant="ghost" size="icon" asChild>
-            <Link href="https://www.facebook.com/emmanueleweje" target="_blank" aria-label="Facebook">
+            <Link href="https://www.facebook.com/emmanuel.eweje.2025?mibextid=wwXIfr" target="_blank" aria-label="Facebook">
               <Facebook className="h-5 w-5" />
             </Link>
           </Button>
