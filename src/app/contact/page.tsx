@@ -1,13 +1,13 @@
-import HeroSection from '@/components/hero-section';
+import ContactSection from '@/components/contact-section';
 import SiteFooter from '@/components/site-footer';
 import SiteHeader from '@/components/site-header';
 
-export default function AboutPage() {
+export default function ContactPage() {
   return (
     <div className="flex flex-col min-h-[100dvh]">
       <SiteHeader />
       <main className="flex-1">
-        <HeroSection />
+        <ContactSection />
       </main>
       <SiteFooter />
     </div>

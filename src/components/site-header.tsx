@@ -6,15 +6,19 @@ import Link from 'next/link';
 import { Menu, Paintbrush } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { usePathname } from 'next/navigation';
+import { cn } from '@/lib/utils';
 
 const navLinks = [
-  { href: '#about', label: 'About' },
-  { href: '#gallery', label: 'Gallery' },
-  { href: '#contact', label: 'Contact' },
+  { href: '/', label: 'About' },
+  { href: '/gallery', label: 'Gallery' },
+  { href: '/exhibitions', label: 'Exhibitions' },
+  { href: '/contact', label: 'Contact' },
 ];
 
 export default function SiteHeader() {
   const [isSheetOpen, setSheetOpen] = useState(false);
+  const pathname = usePathname();
 
   const handleLinkClick = () => {
     setSheetOpen(false);
@@ -37,7 +41,10 @@ export default function SiteHeader() {
             <Link
               key={href}
               href={href}
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
+              className={cn(
+                "transition-colors hover:text-foreground/80",
+                pathname === href ? "text-foreground" : "text-foreground/60"
+              )}
             >
               {label}
             </Link>
@@ -59,7 +66,10 @@ export default function SiteHeader() {
                     key={href}
                     href={href}
                     onClick={handleLinkClick}
-                    className="text-lg font-medium text-foreground/80 hover:text-foreground"
+                    className={cn(
+                      "text-lg font-medium hover:text-foreground",
+                      pathname === href ? "text-foreground" : "text-foreground/80"
+                    )}
                   >
                     {label}
                   </Link>
