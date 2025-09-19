@@ -6,22 +6,8 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { ArtworkSlideshow } from './artwork-slideshow';
-import { db } from '@/lib/firebase';
-import { doc, onSnapshot } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
 
 export default function HeroSection() {
-
-  const [profilePicUrl, setProfilePicUrl] = useState("https://storage.googleapis.com/gweb-a2-9ad0c.appspot.com/config/pfp.jpg");
-  
-  useEffect(() => {
-    const unsub = onSnapshot(doc(db, "config", "profile"), (doc) => {
-        if(doc.exists() && doc.data().profilePictureUrl) {
-            setProfilePicUrl(doc.data().profilePictureUrl);
-        }
-    });
-    return () => unsub();
-  }, []);
   
   const shortBio = "My name is Emmanuel Eweje, and I offer a unique perspective in the realm of contemporary art, driven by a deep passion for creative diversity and a keen eye for design. Over the years, my journey as an artist has been marked by significant achievements, including winning the Next Rated Star award in the Art category and receiving recognition from esteemed competitions like the National Visual Art Competition and the Leap Africa Art Competition. These accomplishments stand as testaments to my dedication and talent in the field. My artistic practice encompasses a wide range of mediums, from drawing to acrylic painting and thread painting . I approach each piece with meticulous attention to detail and a profound understanding of cultural symbolism, aiming to foster dialogue and embrace diversity through my art. Beyond creating art, I have utilized my talents to make a positive impact in my community. As an Arts in Medicine Fellow and art teacher, I have witnessed firsthand the transformative power of art in healing and education. Additionally, my work as a muralist with the House of Bezalel Mural and Graffiti Artist Collective has allowed me to contribute to vibrant urban landscapes and ignite meaningful conversations through bold and dynamic murals. My artworks have been showcased in various exhibitions and competitions, both locally and internationally, including the Connect residency/exhibition in Chicago and the Spanish Embassy Art Competition. These experiences have reinforced my commitment to pushing boundaries and challenging conventional artistic norms. With a diverse skill set that encompasses technical abilities, interpersonal skills, and critical thinking, I continue to explore new avenues in my artistic practice. Through my work, I strive to foster connections, provoke thought, and inspire dialogue, inviting viewers to engage with complex themes of identity, memory, and cultural heritage";
 
@@ -50,14 +36,15 @@ export default function HeroSection() {
             </Button>
           </div>
           <div className="order-1 md:order-2 flex justify-center">
-             <div className="relative w-[400px] h-[400px]">
+             <div className="relative w-full max-w-[400px] aspect-square">
                 <Image
-                    src={profilePicUrl}
+                    src="/artist-image.jpg"
                     alt="Emmanuel Eweje profile picture"
                     fill
                     className="rounded-3xl object-cover"
                     sizes="(max-width: 768px) 100vw, 400px"
                     data-ai-hint="artist portrait"
+                    priority
                 />
              </div>
           </div>
