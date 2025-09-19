@@ -48,9 +48,12 @@ const threadArtworks: Artwork[] = [
   },
   {
     id: 'thread-art-5',
-    title: 'Thread Collection 5',
+    title: 'Peace',
     imageUrl: '/art_slideshow/thread2.jpg',
     imageHint: 'abstract thread art',
+    medium: 'Thread on canvas',
+    size: '60 x 48 inches',
+    year: '2022',
   },
   {
     id: 'thread-art-6',
