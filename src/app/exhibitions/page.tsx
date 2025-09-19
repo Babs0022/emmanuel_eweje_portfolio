@@ -3,6 +3,20 @@ import SiteFooter from '@/components/site-footer';
 import SiteHeader from '@/components/site-header';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Calendar, Award, Trophy, Star, Medal, Heart } from 'lucide-react';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Exhibitions & Awards | Emmanuel Eweje',
+  description: "View a timeline of past and upcoming showcases, competitions, awards, and recognitions for artist Emmanuel Eweje.",
+  openGraph: {
+    title: 'Exhibitions & Awards | Emmanuel Eweje',
+    description: "A timeline of showcases, competitions, awards, and recognitions.",
+  },
+  twitter: {
+    title: 'Exhibitions & Awards | Emmanuel Eweje',
+    description: "A timeline of showcases, competitions, awards, and recognitions.",
+  }
+};
 
 const exhibitions = [
   {
