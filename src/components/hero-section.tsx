@@ -53,8 +53,8 @@ export default function HeroSection() {
         <div className="my-16 md:my-24">
             <div className="relative w-full max-w-4xl mx-auto aspect-video">
                 <Image
-                    src="/artist-image-2.jpg"
-                    alt="Emmanuel Eweje working on an art piece"
+                    src="/art_slideshow/artist-at-work.jpg"
+                    alt="Emmanuel Eweje working on a thread artwork"
                     fill
                     className="rounded-3xl object-cover"
                     sizes="(max-width: 1024px) 100vw, 896px"
