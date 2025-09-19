@@ -4,6 +4,7 @@
 import Image from 'next/image';
 import { Card, CardContent, CardTitle } from '@/components/ui/card';
 import type { Artwork } from './gallery-section';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 
 const threadArtworks: Artwork[] = Array.from({ length: 6 }, (_, i) => ({
   id: `thread-art-${i + 1}`,
@@ -26,31 +27,43 @@ export default function ThreadCollectionSection() {
             </p>
           </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {threadArtworks.map((artwork, index) => (
-            <Card
-              key={artwork.id}
-              className="overflow-hidden bg-background/80 animate-in fade-in duration-500"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <CardContent className="p-0">
-                <div className="aspect-[4/5] relative">
-                  <Image
-                    src={artwork.imageUrl}
-                    alt={artwork.title}
-                    fill
-                    className="object-cover transition-transform duration-300 ease-in-out hover:scale-105"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    data-ai-hint={artwork.imageHint}
-                  />
-                </div>
-                <div className="p-4">
-                  <CardTitle className="text-xl font-semibold">{artwork.title}</CardTitle>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+        <Carousel
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+          className="w-full max-w-sm sm:max-w-md md:max-w-xl lg:max-w-3xl xl:max-w-5xl mx-auto"
+        >
+          <CarouselContent>
+            {threadArtworks.map((artwork, index) => (
+              <CarouselItem key={artwork.id} className="md:basis-1/2 lg:basis-1/3">
+                 <div className="p-1">
+                    <Card
+                      className="overflow-hidden bg-background/80"
+                    >
+                      <CardContent className="p-0">
+                        <div className="aspect-[4/5] relative">
+                          <Image
+                            src={artwork.imageUrl}
+                            alt={artwork.title}
+                            fill
+                            className="object-cover transition-transform duration-300 ease-in-out hover:scale-105"
+                            sizes="(max-width: 768px) 80vw, (max-width: 1280px) 40vw, 33vw"
+                            data-ai-hint={artwork.imageHint}
+                          />
+                        </div>
+                        <div className="p-4">
+                          <CardTitle className="text-xl font-semibold">{artwork.title}</CardTitle>
+                        </div>
+                      </CardContent>
+                    </Card>
+                 </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="hidden sm:flex" />
+          <CarouselNext className="hidden sm:flex" />
+        </Carousel>
       </div>
     </section>
   );
