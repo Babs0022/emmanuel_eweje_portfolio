@@ -17,7 +17,7 @@ export default function HeroSection() {
     <section id="about" className="relative w-full overflow-hidden">
       <div className="absolute inset-0">
         <ArtworkSlideshow />
-        <div className="absolute inset-0 bg-background/80 backdrop-blur-sm"></div>
+        <div className="absolute inset-0 bg-background/90 backdrop-blur-sm"></div>
       </div>
       <div className="relative container mx-auto px-4 py-16 sm:py-24 lg:py-32">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -61,4 +61,3 @@ export default function HeroSection() {
     </section>
   );
 }
-
