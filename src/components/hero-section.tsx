@@ -50,14 +50,16 @@ export default function HeroSection() {
             </Button>
           </div>
           <div className="order-1 md:order-2 flex justify-center">
-             <Image
-                src={profilePicUrl}
-                alt="Emmanuel Eweje profile picture"
-                width={400}
-                height={400}
-                className="rounded-3xl aspect-square object-cover"
-                data-ai-hint="artist portrait"
-              />
+             <div className="relative w-[400px] h-[400px]">
+                <Image
+                    src={profilePicUrl}
+                    alt="Emmanuel Eweje profile picture"
+                    fill
+                    className="rounded-3xl object-cover"
+                    sizes="(max-width: 768px) 100vw, 400px"
+                    data-ai-hint="artist portrait"
+                />
+             </div>
           </div>
         </div>
         <div className="mt-16 md:mt-24">
