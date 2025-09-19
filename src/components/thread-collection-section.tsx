@@ -13,7 +13,7 @@ const threadArtworks: Artwork[] = [
   {
     id: 'thread-art-1',
     title: 'Bold III',
-    imageUrl: '/art_slideshow/art1.jpg',
+    imageUrl: '/art_slideshow/thread1.jpg',
     imageHint: 'abstract thread art',
     size: '24 x 24 inches',
     medium: 'Acrylic on canvas',
@@ -22,7 +22,7 @@ const threadArtworks: Artwork[] = [
   {
     id: 'thread-art-2',
     title: 'Facing the music',
-    imageUrl: '/art_slideshow/art2.jpg',
+    imageUrl: '/art_slideshow/thread2.jpg',
     imageHint: 'abstract thread art',
     size: '24 x 24 inches',
     medium: 'Acrylic on canvas',
@@ -31,7 +31,7 @@ const threadArtworks: Artwork[] = [
   {
     id: 'thread-art-3',
     title: 'Ghost in a city I',
-    imageUrl: '/art_slideshow/art3.jpg',
+    imageUrl: '/art_slideshow/thread3.jpg',
     imageHint: 'abstract thread art',
     size: '36 x 36 inches',
     medium: 'Acrylic on canvas',
@@ -40,7 +40,7 @@ const threadArtworks: Artwork[] = [
   {
     id: 'thread-art-4',
     title: 'Ghost in a city II',
-    imageUrl: '/art_slideshow/art4.jpg',
+    imageUrl: '/art_slideshow/thread1.jpg',
     imageHint: 'abstract thread art',
     size: '30 x 30 inches',
     medium: 'Acrylic on canvas',
@@ -49,13 +49,13 @@ const threadArtworks: Artwork[] = [
   {
     id: 'thread-art-5',
     title: 'Thread Collection 5',
-    imageUrl: '/art_slideshow/art5.jpg',
+    imageUrl: '/art_slideshow/thread2.jpg',
     imageHint: 'abstract thread art',
   },
   {
     id: 'thread-art-6',
     title: 'Thread Collection 6',
-    imageUrl: '/art_slideshow/art6.jpg',
+    imageUrl: '/art_slideshow/thread3.jpg',
     imageHint: 'abstract thread art',
   },
 ];
