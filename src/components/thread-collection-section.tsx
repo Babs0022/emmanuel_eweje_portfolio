@@ -8,8 +8,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
 import { Badge } from './ui/badge';
 
-
-const threadArtworks: Artwork[] = [
+const uniqueThreadArtworks: Artwork[] = [
   {
     id: 'thread-art-1',
     title: 'Verdant dreamer',
@@ -37,34 +36,14 @@ const threadArtworks: Artwork[] = [
     medium: 'Acrylic on canvas',
     year: '2025',
   },
-  {
-    id: 'thread-art-4',
-    title: 'Verdant dreamer',
-    imageUrl: '/art_slideshow/thread1.jpg',
-    imageHint: 'abstract thread art',
-    medium: 'Thread on canvas',
-    size: '48 x 48 inches',
-    year: '2019',
-  },
-  {
-    id: 'thread-art-5',
-    title: 'Facing the music',
-    imageUrl: '/art_slideshow/thread2.jpg',
-    imageHint: 'abstract thread art',
-    size: '24 x 24 inches',
-    medium: 'Acrylic on canvas',
-    year: '2025',
-  },
-  {
-    id: 'thread-art-6',
-    title: 'Ghost in a city I',
-    imageUrl: '/art_slideshow/thread3.jpg',
-    imageHint: 'abstract thread art',
-    size: '36 x 36 inches',
-    medium: 'Acrylic on canvas',
-    year: '2025',
-  },
 ];
+
+// Duplicate the unique artworks to fill the carousel
+const threadArtworks = Array.from({ length: 6 }, (_, i) => ({
+    ...uniqueThreadArtworks[i % uniqueThreadArtworks.length],
+    id: `thread-art-dup-${i}`
+}));
+
 
 export default function ThreadCollectionSection() {
   return (
