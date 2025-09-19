@@ -9,7 +9,6 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/hooks/use-auth';
-import { useProfile } from '@/hooks/use-profile';
 import Image from 'next/image';
 
 const navLinks = [
@@ -23,7 +22,6 @@ export default function SiteHeader() {
   const [isSheetOpen, setSheetOpen] = useState(false);
   const pathname = usePathname();
   const { user, signOutUser } = useAuth();
-  const { profilePictureUrl } = useProfile();
 
   const handleLinkClick = () => {
     setSheetOpen(false);
@@ -34,11 +32,7 @@ export default function SiteHeader() {
       <div className="container flex h-14 max-w-screen-2xl items-center">
         <div className="mr-4 flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
-            {profilePictureUrl ? (
-                <Image src={profilePictureUrl} alt="Emmanuel Eweje" width={24} height={24} className="rounded-full" />
-            ) : (
-                <Paintbrush className="h-6 w-6" />
-            )}
+            <Image src="/artist-image.jpg" alt="Emmanuel Eweje" width={24} height={24} className="rounded-full object-cover" />
             <span className="font-bold font-headline sm:inline-block">
               Emmanuel Eweje
             </span>

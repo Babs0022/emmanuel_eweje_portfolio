@@ -3,25 +3,16 @@ import type { Metadata } from 'next';
 import { Toaster } from '@/components/ui/toaster';
 import './globals.css';
 import { AuthProvider } from '@/hooks/use-auth';
-import { getProfileData } from '@/lib/get-profile-data';
 
-export async function generateMetadata(): Promise<Metadata> {
-  const profileData = await getProfileData();
-  const title = 'Emmanuel Eweje - Artist Portfolio';
-  const description = "Explore the artwork of Emmanuel Eweje in his online gallery.";
-  
-  const icons = profileData.profilePictureUrl ? {
-    icon: profileData.profilePictureUrl,
-    shortcut: profileData.profilePictureUrl,
-    apple: profileData.profilePictureUrl,
-  } : {};
-
-  return {
-    title,
-    description,
-    icons,
-  };
-}
+export const metadata: Metadata = {
+    title: 'Emmanuel Eweje - Artist Portfolio',
+    description: "Explore the artwork of Emmanuel Eweje in his online gallery.",
+    icons: {
+        icon: '/artist-image.jpg',
+        shortcut: '/artist-image.jpg',
+        apple: '/artist-image.jpg',
+    },
+};
 
 
 export default function RootLayout({
