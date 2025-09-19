@@ -17,7 +17,7 @@ export default function HeroSection() {
     <section id="about" className="relative w-full overflow-hidden">
       <div className="absolute inset-0">
         <ArtworkSlideshow />
-        <div className="absolute inset-0 bg-background/80 backdrop-blur-sm"></div>
+        <div className="absolute inset-0 bg-background/90 backdrop-blur-sm"></div>
       </div>
       <div className="relative container mx-auto px-4 py-16 sm:py-24 lg:py-32">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -36,13 +36,13 @@ export default function HeroSection() {
             </Button>
           </div>
           <div className="order-1 md:order-2 flex justify-center">
-             <div className="relative w-full max-w-[400px] aspect-square">
+             <div className="relative w-full max-w-[450px] aspect-square">
                 <Image
                     src="/artist-image.jpg"
                     alt="Emmanuel Eweje profile picture"
                     fill
                     className="rounded-3xl object-cover"
-                    sizes="(max-width: 768px) 100vw, 400px"
+                    sizes="(max-width: 768px) 100vw, 450px"
                     data-ai-hint="artist portrait"
                     priority
                 />
