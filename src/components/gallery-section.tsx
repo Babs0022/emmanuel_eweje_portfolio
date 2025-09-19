@@ -2,25 +2,42 @@
 'use client';
 
 import Image from 'next/image';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { db } from '@/lib/firebase';
 import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { Skeleton } from './ui/skeleton';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from '@/components/ui/dialog';
+import { Badge } from './ui/badge';
 
 export interface Artwork {
   id: string;
   title: string;
   imageUrl: string;
   imageHint: string;
+  size?: string;
+  medium?: string;
+  year?: string;
 }
 
-const staticArtworks: Artwork[] = Array.from({ length: 6 }, (_, i) => ({
-  id: `static-art-${i + 1}`,
-  title: `Artwork ${i + 1}`,
-  imageUrl: `/art_slideshow/art${i + 1}.jpg`,
-  imageHint: 'abstract art',
-}));
+const staticArtworks: Artwork[] = [
+  {
+    id: 'static-art-1',
+    title: 'Bold III',
+    imageUrl: '/art_slideshow/art1.jpg',
+    imageHint: 'abstract art',
+    size: '24 x 24 inches',
+    medium: 'Acrylic on canvas',
+    year: '2025',
+  },
+  ...Array.from({ length: 5 }, (_, i) => ({
+    id: `static-art-${i + 2}`,
+    title: `Artwork ${i + 2}`,
+    imageUrl: `/art_slideshow/art${i + 2}.jpg`,
+    imageHint: 'abstract art',
+  }))
+];
+
 
 export default function GallerySection() {
   const [firestoreArtworks, setFirestoreArtworks] = useState<Artwork[]>([]);
@@ -53,7 +70,7 @@ export default function GallerySection() {
               Artwork Gallery
             </h2>
             <p className="max-w-[900px] text-card-foreground/80 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              A curated selection of Emmanuel Eweje&apos;s recent works.
+              A curated selection of Emmanuel Eweje&apos;s recent works. Click on an artwork to see more details.
             </p>
           </div>
         </div>
@@ -77,27 +94,50 @@ export default function GallerySection() {
             </p>
           ) : (
             artworks.map((artwork, index) => (
-              <Card
-                key={artwork.id}
-                className="overflow-hidden bg-background/50 animate-in fade-in duration-500"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <CardContent className="p-0">
-                  <div className="aspect-[4/5] relative">
-                    <Image
-                      src={artwork.imageUrl}
-                      alt={artwork.title}
-                      fill
-                      className="object-cover transition-transform duration-300 ease-in-out hover:scale-105"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      data-ai-hint={artwork.imageHint}
-                    />
+              <Dialog key={artwork.id}>
+                <DialogTrigger asChild>
+                  <Card
+                    className="overflow-hidden bg-background/50 animate-in fade-in duration-500 cursor-pointer group"
+                    style={{ animationDelay: `${index * 100}ms` }}
+                  >
+                    <CardContent className="p-0">
+                      <div className="aspect-[4/5] relative">
+                        <Image
+                          src={artwork.imageUrl}
+                          alt={artwork.title}
+                          fill
+                          className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          data-ai-hint={artwork.imageHint}
+                        />
+                      </div>
+                      <div className="p-4">
+                        <CardTitle className="text-xl font-semibold">{artwork.title}</CardTitle>
+                         {artwork.year && <CardDescription className="text-sm mt-1">{artwork.year}</CardDescription>}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </DialogTrigger>
+                <DialogContent className="max-w-3xl">
+                  <DialogHeader>
+                    <DialogTitle className="text-3xl">{artwork.title}</DialogTitle>
+                     <DialogDescription className="text-base pt-2">
+                        {artwork.medium && <p>{artwork.medium}</p>}
+                        {artwork.size && <p>{artwork.size}</p>}
+                     </DialogDescription>
+                  </DialogHeader>
+                  <div className="relative aspect-video mt-4">
+                     <Image
+                          src={artwork.imageUrl}
+                          alt={artwork.title}
+                          fill
+                          className="object-contain rounded-md"
+                          sizes="100vw"
+                        />
                   </div>
-                  <div className="p-4">
-                    <CardTitle className="text-xl font-semibold">{artwork.title}</CardTitle>
-                  </div>
-                </CardContent>
-              </Card>
+                    {artwork.year && <Badge variant="outline" className="mt-4 w-fit">{artwork.year}</Badge>}
+                </DialogContent>
+              </Dialog>
             ))
           )}
         </div>

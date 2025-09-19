@@ -2,16 +2,30 @@
 'use client';
 
 import Image from 'next/image';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import type { Artwork } from './gallery-section';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from '@/components/ui/dialog';
+import { Badge } from './ui/badge';
 
-const threadArtworks: Artwork[] = Array.from({ length: 6 }, (_, i) => ({
-  id: `thread-art-${i + 1}`,
-  title: `Thread Collection ${i + 1}`,
-  imageUrl: `/art_slideshow/art${i + 1}.jpg`,
-  imageHint: 'abstract thread art',
-}));
+
+const threadArtworks: Artwork[] = [
+  {
+    id: 'thread-art-1',
+    title: 'Bold III',
+    imageUrl: '/art_slideshow/art1.jpg',
+    imageHint: 'abstract thread art',
+    size: '24 x 24 inches',
+    medium: 'Acrylic on canvas',
+    year: '2025',
+  },
+  ...Array.from({ length: 5 }, (_, i) => ({
+    id: `thread-art-${i + 2}`,
+    title: `Thread Collection ${i + 2}`,
+    imageUrl: `/art_slideshow/art${i + 2}.jpg`,
+    imageHint: 'abstract thread art',
+  }))
+];
 
 export default function ThreadCollectionSection() {
   return (
@@ -23,7 +37,7 @@ export default function ThreadCollectionSection() {
               My Thread Collection
             </h2>
             <p className="max-w-[900px] text-foreground/80 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              A special collection of intricate thread-based artworks.
+              A special collection of intricate thread-based artworks. Click on an artwork to see more details.
             </p>
           </div>
         </div>
@@ -38,20 +52,46 @@ export default function ThreadCollectionSection() {
             {threadArtworks.map((artwork) => (
               <CarouselItem key={artwork.id} className="md:basis-1/2 lg:basis-1/3">
                 <div className="p-1">
-                  <Card className="overflow-hidden bg-background/80 group">
-                    <CardContent className="p-0">
-                      <div className="aspect-[4/5] relative">
-                        <Image
-                          src={artwork.imageUrl}
-                          alt={artwork.title}
-                          fill
-                          className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
-                          sizes="(max-width: 768px) 80vw, (max-w: 1280px) 40vw, 33vw"
-                          data-ai-hint={artwork.imageHint}
-                        />
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Card className="overflow-hidden bg-background/80 group cursor-pointer">
+                        <CardContent className="p-0">
+                          <div className="aspect-[4/5] relative">
+                            <Image
+                              src={artwork.imageUrl}
+                              alt={artwork.title}
+                              fill
+                              className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
+                              sizes="(max-width: 768px) 80vw, (max-w: 1280px) 40vw, 33vw"
+                              data-ai-hint={artwork.imageHint}
+                            />
+                          </div>
+                           <div className="p-4">
+                            <CardTitle className="text-lg">{artwork.title}</CardTitle>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-3xl">
+                      <DialogHeader>
+                        <DialogTitle className="text-3xl">{artwork.title}</DialogTitle>
+                         <DialogDescription className="text-base pt-2">
+                            {artwork.medium && <p>{artwork.medium}</p>}
+                            {artwork.size && <p>{artwork.size}</p>}
+                         </DialogDescription>
+                      </DialogHeader>
+                      <div className="relative aspect-video mt-4">
+                         <Image
+                              src={artwork.imageUrl}
+                              alt={artwork.title}
+                              fill
+                              className="object-contain rounded-md"
+                              sizes="100vw"
+                            />
                       </div>
-                    </CardContent>
-                  </Card>
+                      {artwork.year && <Badge variant="outline" className="mt-4 w-fit">{artwork.year}</Badge>}
+                    </DialogContent>
+                  </Dialog>
                 </div>
               </CarouselItem>
             ))}
@@ -63,3 +103,4 @@ export default function ThreadCollectionSection() {
     </section>
   );
 }
+
