@@ -30,12 +30,39 @@ const staticArtworks: Artwork[] = [
     medium: 'Acrylic on canvas',
     year: '2025',
   },
-  ...Array.from({ length: 5 }, (_, i) => ({
-    id: `static-art-${i + 2}`,
-    title: `Artwork ${i + 2}`,
-    imageUrl: `/art_slideshow/art${i + 2}.jpg`,
+  {
+    id: 'static-art-2',
+    title: 'Facing the music',
+    imageUrl: '/art_slideshow/art2.jpg',
     imageHint: 'abstract art',
-  }))
+    size: '24 x 24 inches',
+    medium: 'Acrylic on canvas',
+    year: '2025',
+  },
+  {
+    id: 'static-art-3',
+    title: 'Artwork 3',
+    imageUrl: '/art_slideshow/art3.jpg',
+    imageHint: 'abstract art',
+  },
+  {
+    id: 'static-art-4',
+    title: 'Artwork 4',
+    imageUrl: '/art_slideshow/art4.jpg',
+    imageHint: 'abstract art',
+  },
+  {
+    id: 'static-art-5',
+    title: 'Artwork 5',
+    imageUrl: '/art_slideshow/art5.jpg',
+    imageHint: 'abstract art',
+  },
+  {
+    id: 'static-art-6',
+    title: 'Artwork 6',
+    imageUrl: '/art_slideshow/art6.jpg',
+    imageHint: 'abstract art',
+  },
 ];
 
 

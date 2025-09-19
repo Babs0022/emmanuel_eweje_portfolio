@@ -19,12 +19,39 @@ const threadArtworks: Artwork[] = [
     medium: 'Acrylic on canvas',
     year: '2025',
   },
-  ...Array.from({ length: 5 }, (_, i) => ({
-    id: `thread-art-${i + 2}`,
-    title: `Thread Collection ${i + 2}`,
-    imageUrl: `/art_slideshow/art${i + 2}.jpg`,
+  {
+    id: 'thread-art-2',
+    title: 'Facing the music',
+    imageUrl: '/art_slideshow/art2.jpg',
     imageHint: 'abstract thread art',
-  }))
+    size: '24 x 24 inches',
+    medium: 'Acrylic on canvas',
+    year: '2025',
+  },
+  {
+    id: 'thread-art-3',
+    title: 'Thread Collection 3',
+    imageUrl: '/art_slideshow/art3.jpg',
+    imageHint: 'abstract thread art',
+  },
+  {
+    id: 'thread-art-4',
+    title: 'Thread Collection 4',
+    imageUrl: '/art_slideshow/art4.jpg',
+    imageHint: 'abstract thread art',
+  },
+  {
+    id: 'thread-art-5',
+    title: 'Thread Collection 5',
+    imageUrl: '/art_slideshow/art5.jpg',
+    imageHint: 'abstract thread art',
+  },
+  {
+    id: 'thread-art-6',
+    title: 'Thread Collection 6',
+    imageUrl: '/art_slideshow/art6.jpg',
+    imageHint: 'abstract thread art',
+  },
 ];
 
 export default function ThreadCollectionSection() {
@@ -103,4 +130,3 @@ export default function ThreadCollectionSection() {
     </section>
   );
 }
-
