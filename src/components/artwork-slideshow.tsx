@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import type { Artwork } from './gallery-section';
 
-const staticArtworks: Artwork[] = Array.from({ length: 8 }, (_, i) => ({
+const staticArtworks: Artwork[] = Array.from({ length: 6 }, (_, i) => ({
   id: `art-${i + 1}`,
   title: `Artwork ${i + 1}`,
   imageUrl: `/art_slideshow/art${i + 1}.jpg`,
@@ -19,7 +19,7 @@ export function ArtworkSlideshow() {
   useEffect(() => {
     // Duplicate images to create a seamless looping effect if we have images
     if (staticArtworks.length > 0) {
-        // We need enough images to fill the screen and loop, 24 gives us 3 rows of 8
+        // We need enough images to fill the screen and loop, 24 gives us enough for 3 rows
         const duplicatedArtworks = [];
         for (let i = 0; i < 24; i++) {
             duplicatedArtworks.push(staticArtworks[i % staticArtworks.length]);
