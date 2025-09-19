@@ -68,9 +68,12 @@ const staticArtworks: Artwork[] = [
   },
   {
     id: 'static-art-6',
-    title: 'Artwork 6',
+    title: 'Overthinking',
     imageUrl: '/art_slideshow/art6.jpg',
     imageHint: 'abstract art',
+    size: '30 x 30 inches',
+    medium: 'Acrylic on canvas',
+    year: '2025',
   },
 ];
 
