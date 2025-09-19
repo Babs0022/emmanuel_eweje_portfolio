@@ -50,9 +50,12 @@ const staticArtworks: Artwork[] = [
   },
   {
     id: 'static-art-4',
-    title: 'Artwork 4',
+    title: 'Ghost in a city II',
     imageUrl: '/art_slideshow/art4.jpg',
     imageHint: 'abstract art',
+    size: '30 x 30 inches',
+    medium: 'Acrylic on canvas',
+    year: '2025',
   },
   {
     id: 'static-art-5',

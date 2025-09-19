@@ -39,9 +39,12 @@ const threadArtworks: Artwork[] = [
   },
   {
     id: 'thread-art-4',
-    title: 'Thread Collection 4',
+    title: 'Ghost in a city II',
     imageUrl: '/art_slideshow/art4.jpg',
     imageHint: 'abstract thread art',
+    size: '30 x 30 inches',
+    medium: 'Acrylic on canvas',
+    year: '2025',
   },
   {
     id: 'thread-art-5',
@@ -92,7 +95,7 @@ export default function ThreadCollectionSection() {
                               alt={artwork.title}
                               fill
                               className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
-                              sizes="(max-width: 768px) 80vw, (max-w: 1280px) 40vw, 33vw"
+                              sizes="(max-width: 768px) 80vw, (max-width: 1280px) 40vw, 33vw"
                               data-ai-hint={artwork.imageHint}
                             />
                           </div>
