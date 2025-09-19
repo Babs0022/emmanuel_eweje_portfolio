@@ -29,12 +29,11 @@ const uniqueThreadArtworks: Artwork[] = [
   },
   {
     id: 'thread-art-3',
-    title: 'Ghost in a city I',
+    title: 'Untitled',
     imageUrl: '/art_slideshow/thread3.jpg',
     imageHint: 'abstract thread art',
-    size: '36 x 36 inches',
-    medium: 'Acrylic on canvas',
-    year: '2025',
+    size: '42 x 24 inches',
+    medium: 'Thread on canvas',
   },
 ];
 
