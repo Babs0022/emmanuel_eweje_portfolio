@@ -1,14 +1,109 @@
+
 import SiteFooter from '@/components/site-footer';
 import SiteHeader from '@/components/site-header';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Calendar, Award, Trophy, Star, Medal, Heart } from 'lucide-react';
 
-// TODO: Replace with data from a CMS or database
-const exhibitions:any[] = [
+const exhibitions = [
+  {
+    title: 'Spanish Embassy Art Competition and Exhibition',
+    venue: 'Spanish Embassy',
+    date: '2014 & 2015',
+    icon: Calendar,
+  },
+  {
+    title: 'Araism Art Exhibition',
+    venue: 'Araism',
+    date: '2016',
+    icon: Calendar,
+  }
 ];
 
-// TODO: Replace with data from a CMS or database
-const awards:any[] = [
+const awards = [
+    {
+        title: 'Zonal Category Winner',
+        event: 'National Visual Art Competition',
+        year: '2014',
+        icon: Trophy,
+    },
+    {
+        title: 'Still Life Category Winner',
+        event: 'Demian Art Competition',
+        year: '2013',
+        icon: Award,
+    },
+    {
+        title: 'Winner',
+        event: 'Leap Africa Art Competition',
+        year: '2017',
+        icon: Trophy,
+    },
+    {
+        title: 'Winner (Art category)',
+        event: 'Akili Dada Lead Contest, Kenya',
+        year: '2017',
+        icon: Award,
+    },
+    {
+        title: 'Art Ambassador',
+        event: 'Leap Africa, Nigeria',
+        year: '2017',
+        icon: Star,
+    },
+    {
+        title: '2nd Runner up',
+        event: 'Ramati Art Africa Competition',
+        year: '2018',
+        icon: Medal,
+    },
+    {
+        title: 'Outstanding Contribution',
+        event: 'International Exchange Mural project with Sara Hinds',
+        year: '2019',
+        icon: Award,
+    },
+    {
+        title: 'Outstanding Arts in Medicine Fellow',
+        event: 'Arts in Medicine Fellowship, 2019 cohort',
+        year: '2019',
+        icon: Heart,
+    },
+    {
+        title: 'Certificate of Participation',
+        event: 'Arts in Medicine Fellowship Program',
+        year: '2019',
+        icon: Medal,
+    },
+    {
+        title: 'Grand Prize Winner',
+        event: 'Felabration Art Competition',
+        year: '2021',
+        icon: Trophy,
+    },
+    {
+        title: 'Third Place Winner',
+        event: 'Spanish Embassy Art Competition, Abuja',
+        year: '2021',
+        icon: Award,
+    },
+    {
+        title: 'Grand Prize Winner',
+        event: 'Felabration Art Competition',
+        year: '2023',
+        icon: Trophy,
+    },
+    {
+        title: 'Grand Prize Winner',
+        event: 'Felabration Art Competition',
+        year: '2024',
+        icon: Trophy,
+    },
+    {
+        title: 'Textile Category Prize Winner',
+        event: 'Life In My City Art Festival',
+        year: '2025',
+        icon: Award,
+    }
 ];
 
 export default function ExhibitionsPage() {
