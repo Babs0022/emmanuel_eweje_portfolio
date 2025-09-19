@@ -59,9 +59,12 @@ const staticArtworks: Artwork[] = [
   },
   {
     id: 'static-art-5',
-    title: 'Artwork 5',
+    title: 'Glimmer of hope',
     imageUrl: '/art_slideshow/art5.jpg',
     imageHint: 'abstract art',
+    size: '30 x 30 inches',
+    medium: 'Acrylic on canvas',
+    year: '2025',
   },
   {
     id: 'static-art-6',
@@ -154,9 +157,11 @@ export default function GallerySection() {
                 <DialogContent className="max-w-3xl">
                   <DialogHeader>
                     <DialogTitle className="text-3xl">{artwork.title}</DialogTitle>
-                     <DialogDescription className="text-base pt-2">
-                        {artwork.medium && <span className="block">{artwork.medium}</span>}
-                        {artwork.size && <span className="block">{artwork.size}</span>}
+                     <DialogDescription asChild>
+                        <div className="text-base pt-2">
+                            {artwork.medium && <span className="block">{artwork.medium}</span>}
+                            {artwork.size && <span className="block">{artwork.size}</span>}
+                        </div>
                      </DialogDescription>
                   </DialogHeader>
                   <div className="relative aspect-video mt-4">
