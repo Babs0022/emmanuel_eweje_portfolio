@@ -2,7 +2,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardTitle } from '@/components/ui/card';
 import type { Artwork } from './gallery-section';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
@@ -12,12 +12,12 @@ import { Badge } from './ui/badge';
 const threadArtworks: Artwork[] = [
   {
     id: 'thread-art-1',
-    title: 'Bold III',
+    title: 'Verdant dreamer',
     imageUrl: '/art_slideshow/thread1.jpg',
     imageHint: 'abstract thread art',
-    size: '24 x 24 inches',
-    medium: 'Acrylic on canvas',
-    year: '2025',
+    medium: 'Thread on canvas',
+    size: '48 x 48 inches',
+    year: '2019',
   },
   {
     id: 'thread-art-2',
