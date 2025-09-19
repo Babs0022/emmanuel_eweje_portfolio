@@ -2,9 +2,11 @@
 'use client';
 
 import Image from 'next/image';
-import { Card, CardContent, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import type { Artwork } from './gallery-section';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import useEmblaCarousel from 'embla-carousel-react';
+import React from 'react';
 
 const threadArtworks: Artwork[] = Array.from({ length: 6 }, (_, i) => ({
   id: `thread-art-${i + 1}`,
@@ -14,8 +16,22 @@ const threadArtworks: Artwork[] = Array.from({ length: 6 }, (_, i) => ({
 }));
 
 export default function ThreadCollectionSection() {
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+    align: 'center',
+  });
+
+  const scrollPrev = React.useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = React.useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+
+
   return (
-    <section id="thread-collection" className="w-full py-16 md:py-24 lg:py-32">
+    <section id="thread-collection" className="w-full py-16 md:py-24 lg:py-32 overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
           <div className="space-y-2">
@@ -27,43 +43,32 @@ export default function ThreadCollectionSection() {
             </p>
           </div>
         </div>
-        <Carousel
-          opts={{
-            align: "start",
-            loop: true,
-          }}
-          className="w-full max-w-sm sm:max-w-md md:max-w-xl lg:max-w-3xl xl:max-w-5xl mx-auto"
-        >
-          <CarouselContent>
-            {threadArtworks.map((artwork, index) => (
-              <CarouselItem key={artwork.id} className="md:basis-1/2 lg:basis-1/3">
-                 <div className="p-1">
-                    <Card
-                      className="overflow-hidden bg-background/80"
-                    >
-                      <CardContent className="p-0">
-                        <div className="aspect-[4/5] relative">
-                          <Image
-                            src={artwork.imageUrl}
-                            alt={artwork.title}
-                            fill
-                            className="object-cover transition-transform duration-300 ease-in-out hover:scale-105"
-                            sizes="(max-width: 768px) 80vw, (max-width: 1280px) 40vw, 33vw"
-                            data-ai-hint={artwork.imageHint}
-                          />
-                        </div>
-                        <div className="p-4">
-                          <CardTitle className="text-xl font-semibold">{artwork.title}</CardTitle>
-                        </div>
-                      </CardContent>
-                    </Card>
-                 </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className="hidden sm:flex" />
-          <CarouselNext className="hidden sm:flex" />
-        </Carousel>
+        <div className="relative">
+          <div className="overflow-hidden" ref={emblaRef}>
+            <div className="flex">
+              {threadArtworks.map((artwork, index) => (
+                <div key={artwork.id} className="flex-[0_0_80%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_33.33%] pl-4">
+                  <Card className="overflow-hidden bg-background/80 group">
+                    <CardContent className="p-0">
+                      <div className="aspect-[4/5] relative">
+                        <Image
+                          src={artwork.imageUrl}
+                          alt={artwork.title}
+                          fill
+                          className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
+                          sizes="(max-width: 768px) 80vw, (max-w: 1280px) 40vw, 33vw"
+                          data-ai-hint={artwork.imageHint}
+                        />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              ))}
+            </div>
+          </div>
+           <CarouselPrevious onClick={scrollPrev} className="absolute left-0 top-1/2 -translate-y-1/2 z-10" />
+           <CarouselNext onClick={scrollNext} className="absolute right-0 top-1/2 -translate-y-1/2 z-10" />
+        </div>
       </div>
     </section>
   );
