@@ -1,6 +1,8 @@
+
 import GallerySection from '@/components/gallery-section';
 import SiteFooter from '@/components/site-footer';
 import SiteHeader from '@/components/site-header';
+import ThreadCollectionSection from '@/components/thread-collection-section';
 
 export default function GalleryPage() {
   return (
@@ -8,6 +10,7 @@ export default function GalleryPage() {
       <SiteHeader />
       <main className="flex-1">
         <GallerySection />
+        <ThreadCollectionSection />
       </main>
       <SiteFooter />
     </div>
