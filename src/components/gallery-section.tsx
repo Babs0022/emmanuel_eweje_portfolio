@@ -15,8 +15,15 @@ export interface Artwork {
   imageHint: string;
 }
 
+const staticArtworks: Artwork[] = Array.from({ length: 6 }, (_, i) => ({
+  id: `static-art-${i + 1}`,
+  title: `Artwork ${i + 1}`,
+  imageUrl: `/art_slideshow/art${i + 1}.jpg`,
+  imageHint: 'abstract art',
+}));
+
 export default function GallerySection() {
-  const [artworks, setArtworks] = useState<Artwork[]>([]);
+  const [firestoreArtworks, setFirestoreArtworks] = useState<Artwork[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -26,11 +33,16 @@ export default function GallerySection() {
       querySnapshot.forEach((doc) => {
         artworksData.push({ id: doc.id, ...doc.data() } as Artwork);
       });
-      setArtworks(artworksData);
+      setFirestoreArtworks(artworksData);
+      setLoading(false);
+    }, (error) => {
+      console.error("Error fetching firestore artworks: ", error);
       setLoading(false);
     });
     return () => unsubscribe();
   }, []);
+
+  const artworks = [...firestoreArtworks, ...staticArtworks];
 
   return (
     <section id="gallery" className="w-full py-16 md:py-24 lg:py-32 bg-card">
