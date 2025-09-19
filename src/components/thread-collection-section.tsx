@@ -38,10 +38,13 @@ const uniqueThreadArtworks: Artwork[] = [
 ];
 
 // Duplicate the unique artworks to fill the carousel
-const threadArtworks = Array.from({ length: 6 }, (_, i) => ({
-    ...uniqueThreadArtworks[i % uniqueThreadArtworks.length],
-    id: `thread-art-dup-${i}`
-}));
+const threadArtworks = Array.from({ length: 6 }, (_, i) => {
+    const uniqueArtwork = uniqueThreadArtworks[i % uniqueThreadArtworks.length];
+    return {
+        ...uniqueArtwork,
+        id: `thread-art-dup-${i}`
+    };
+});
 
 
 export default function ThreadCollectionSection() {
@@ -93,8 +96,8 @@ export default function ThreadCollectionSection() {
                       <DialogHeader>
                         <DialogTitle className="text-3xl">{artwork.title}</DialogTitle>
                          <DialogDescription className="text-base pt-2">
-                            {artwork.medium && <div>{artwork.medium}</div>}
-                            {artwork.size && <div>{artwork.size}</div>}
+                            {artwork.medium && <span className="block">{artwork.medium}</span>}
+                            {artwork.size && <span className="block">{artwork.size}</span>}
                          </DialogDescription>
                       </DialogHeader>
                       <div className="relative aspect-video mt-4">
