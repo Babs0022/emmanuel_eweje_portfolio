@@ -149,8 +149,8 @@ export default function GallerySection() {
                   <DialogHeader>
                     <DialogTitle className="text-3xl">{artwork.title}</DialogTitle>
                      <DialogDescription className="text-base pt-2">
-                        {artwork.medium && <p>{artwork.medium}</p>}
-                        {artwork.size && <p>{artwork.size}</p>}
+                        {artwork.medium && <div>{artwork.medium}</div>}
+                        {artwork.size && <div>{artwork.size}</div>}
                      </DialogDescription>
                   </DialogHeader>
                   <div className="relative aspect-video mt-4">
