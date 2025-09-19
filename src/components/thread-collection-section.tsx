@@ -20,12 +20,12 @@ const uniqueThreadArtworks: Artwork[] = [
   },
   {
     id: 'thread-art-2',
-    title: 'Facing the music',
+    title: 'Peace',
     imageUrl: '/art_slideshow/thread2.jpg',
     imageHint: 'abstract thread art',
-    size: '24 x 24 inches',
-    medium: 'Acrylic on canvas',
-    year: '2025',
+    size: '60 x 48 inches',
+    medium: 'Thread on canvas',
+    year: '2022',
   },
   {
     id: 'thread-art-3',
