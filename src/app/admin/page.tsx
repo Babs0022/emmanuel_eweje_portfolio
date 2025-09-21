@@ -19,9 +19,68 @@ import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import type { Artwork } from '@/components/gallery-section';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import { Trash2 } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+
+const staticArtworks: Artwork[] = [
+  {
+    id: 'static-art-1',
+    title: 'Bold III',
+    imageUrl: '/art_slideshow/art1.jpg',
+    imageHint: 'abstract art',
+    size: '24 x 24 inches',
+    medium: 'Acrylic on canvas',
+    year: '2025',
+  },
+  {
+    id: 'static-art-2',
+    title: 'Facing the music',
+    imageUrl: '/art_slideshow/art2.jpg',
+    imageHint: 'abstract art',
+    size: '24 x 24 inches',
+    medium: 'Acrylic on canvas',
+    year: '2025',
+  },
+  {
+    id: 'static-art-3',
+    title: 'Ghost in a city I',
+    imageUrl: '/art_slideshow/art3.jpg',
+    imageHint: 'abstract art',
+    size: '36 x 36 inches',
+    medium: 'Acrylic on canvas',
+    year: '2025',
+  },
+  {
+    id: 'static-art-4',
+    title: 'Ghost in a city II',
+    imageUrl: '/art_slideshow/art4.jpg',
+    imageHint: 'abstract art',
+    size: '30 x 30 inches',
+    medium: 'Acrylic on canvas',
+    year: '2025',
+  },
+  {
+    id: 'static-art-5',
+    title: 'Glimmer of hope',
+    imageUrl: '/art_slideshow/art5.jpg',
+    imageHint: 'abstract art',
+    size: '30 x 30 inches',
+    medium: 'Acrylic on canvas',
+    year: '2025',
+  },
+  {
+    id: 'static-art-6',
+    title: 'Overthinking',
+    imageUrl: '/art_slideshow/art6.jpg',
+    imageHint: 'abstract art',
+    size: '30 x 30 inches',
+    medium: 'Acrylic on canvas',
+    year: '2025',
+  },
+];
+
 
 function ManageArtworks() {
-  const [artworks, setArtworks] = useState<Artwork[]>([]);
+  const [firestoreArtworks, setFirestoreArtworks] = useState<Artwork[]>([]);
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
 
@@ -32,13 +91,21 @@ function ManageArtworks() {
       querySnapshot.forEach((doc) => {
         artworksData.push({ id: doc.id, ...doc.data() } as Artwork);
       });
-      setArtworks(artworksData);
+      setFirestoreArtworks(artworksData);
       setLoading(false);
     });
     return () => unsubscribe();
   }, []);
 
   const handleDelete = async (artwork: Artwork) => {
+    if (artwork.id.startsWith('static-')) {
+      toast({
+        variant: "destructive",
+        title: "Deletion Failed",
+        description: "Static artworks cannot be deleted from the admin panel.",
+      });
+      return;
+    }
     try {
       const result = await deleteArtwork(artwork.id, artwork.imageUrl);
       if (result.error) {
@@ -57,7 +124,9 @@ function ManageArtworks() {
     }
   };
 
-  if (loading) {
+  const allArtworks = [...firestoreArtworks, ...staticArtworks];
+
+  if (loading && firestoreArtworks.length === 0) {
     return (
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {Array.from({ length: 3 }).map((_, index) => (
@@ -76,39 +145,44 @@ function ManageArtworks() {
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
-        {artworks.length === 0 ? (
+        {allArtworks.length === 0 ? (
           <p className="text-muted-foreground text-center">No artworks uploaded yet.</p>
         ) : (
           <div className="space-y-4">
-            {artworks.map((artwork) => (
+            {allArtworks.map((artwork) => (
               <div key={artwork.id} className="flex items-center justify-between p-2 border rounded-lg">
                 <div className="flex items-center gap-4">
                   <Image src={artwork.imageUrl} alt={artwork.title} width={64} height={64} className="rounded-md object-cover aspect-square" />
                   <span className="font-medium">{artwork.title}</span>
                 </div>
-                <AlertDialog>
-                  <AlertDialogTrigger asChild>
-                    <Button variant="destructive" size="icon">
-                      <Trash2 className="h-4 w-4" />
-                      <span className="sr-only">Delete Artwork</span>
-                    </Button>
-                  </AlertDialogTrigger>
-                  <AlertDialogContent>
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                      <AlertDialogDescription>
-                        This action cannot be undone. This will permanently delete the artwork
-                        <span className="font-bold">&quot;{artwork.title}&quot;</span> and remove its image from storage.
-                      </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel>Cancel</AlertDialogCancel>
-                      <AlertDialogAction onClick={() => handleDelete(artwork)}>
-                        Delete
-                      </AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
+                 <div className="flex items-center gap-2">
+                   {artwork.id.startsWith('static-') && (
+                      <Badge variant="secondary">Static</Badge>
+                   )}
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button variant="destructive" size="icon" disabled={artwork.id.startsWith('static-')}>
+                          <Trash2 className="h-4 w-4" />
+                          <span className="sr-only">Delete Artwork</span>
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                          <AlertDialogDescription>
+                            This action cannot be undone. This will permanently delete the artwork
+                            <span className="font-bold">&quot;{artwork.title}&quot;</span> and remove its image from storage.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+                          <AlertDialogAction onClick={() => handleDelete(artwork)}>
+                            Delete
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+                 </div>
               </div>
             ))}
           </div>
