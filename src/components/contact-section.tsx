@@ -3,13 +3,8 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Phone, Mail, Instagram, Facebook } from 'lucide-react';
-import dynamic from 'next/dynamic';
+import Script from 'next/script';
 import Link from 'next/link';
-
-const CalendlyWidget = dynamic(() => import('./calendly-widget'), {
-    ssr: false,
-    loading: () => <div className="h-[700px] w-full animate-pulse rounded-md bg-muted" />
-});
 
 const TiktokIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" {...props}>
@@ -89,7 +84,8 @@ export default function ContactSection() {
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <CalendlyWidget url="https://calendly.com/ewejeemmanuelartspace/30min" />
+                    <div className="calendly-inline-widget" data-url="https://calendly.com/ewejeemmanuelartspace/30min" style={{ minWidth: '320px', height: '700px' }}></div>
+                    <Script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async />
                 </CardContent>
             </Card>
         </div>
