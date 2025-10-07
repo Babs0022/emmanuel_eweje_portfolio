@@ -3,8 +3,13 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Phone, Mail, Instagram, Facebook } from 'lucide-react';
-import CalendlyWidget from './calendly-widget';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
+
+const CalendlyWidget = dynamic(() => import('./calendly-widget'), {
+    ssr: false,
+    loading: () => <div className="h-[700px] w-full animate-pulse rounded-md bg-muted" />
+});
 
 const TiktokIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" {...props}>
