@@ -89,7 +89,7 @@ export default function ContactSection() {
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <CalendlyWidget url="https://calendly.com/ewejeemmanuelartspace" />
+                    <CalendlyWidget url="https://calendly.com/ewejeemmanuelartspace/new-meeting" />
                 </CardContent>
             </Card>
         </div>
